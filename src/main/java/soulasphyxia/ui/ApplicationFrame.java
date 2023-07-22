@@ -1,22 +1,34 @@
 package soulasphyxia.ui;
 
+import lombok.Getter;
+import lombok.Setter;
+import soulasphyxia.utils.ResourcesLoader;
+
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-
+@Getter
+@Setter
 public class ApplicationFrame extends JFrame {
-    private final int FRAME_WIDTH = 1280;
-    private final int FRAME_HEIGHT = 720;
-
+    private final int FRAME_WIDTH = 1269;
+    private final int FRAME_HEIGHT = 764;
     private final GameDisplay display;
-
-
-
+    private boolean gameModeSet = false;
+    private MovementButton rightButton;
+    private MovementButton leftButton;
+    private MenuButton gameBBtn;
+    private MenuButton gameABtn;
+    private ResourcesLoader rl = new ResourcesLoader();
+    private MenuButton rulesBtn;
     public ApplicationFrame(GameDisplay display){
         super("Эмулятор Электроника ИМ-03 Тайны Океана");
         this.display = display;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(FRAME_WIDTH,FRAME_HEIGHT);
+        setResizable(false);
+        ImageIcon icon = new ImageIcon(rl.getResource("images/background_source.jpg"));
+        setContentPane(new JLabel(icon));
         setLocationRelativeTo(null);
         initComponents();
         setLayout(null);
@@ -24,56 +36,103 @@ public class ApplicationFrame extends JFrame {
     }
 
     private void initComponents() {
-        getContentPane().setBackground(Color.decode("#FFFACC"));
         display.setLocation((FRAME_WIDTH - display.getDISPLAY_WIDTH())/2,
                             (FRAME_HEIGHT-display.getDISPLAY_HEIGHT())/2);
         add(display);
 
-
-        MovementButton leftButton = new MovementButton();
-        leftButton.setBounds(100,500,50,50);
-
+        leftButton = new MovementButton();
+        leftButton.setBounds(98,499,90,90);
         add(leftButton);
-        MovementButton rightButton = new MovementButton();
-        rightButton.setBounds(1135,500,50,50);
+
+        rightButton = new MovementButton();
+        rightButton.setBounds(1093,502,90,90);
         add(rightButton);
 
+
         leftButton.addActionListener((e) -> {
-            display.getDiver().left();
+            display.getDiver().prevFrame();
             display.update(display.getGraphics());
         });
 
         rightButton.addActionListener((e) -> {
-            display.getDiver().right();
+            display.getDiver().nextFrame();
             display.update(display.getGraphics());
         });
 
-        MenuButton gameABtn = new MenuButton();
-        gameABtn.setBounds(1100,250, gameABtn.getWidth(),gameABtn.getHeight());
-        JLabel gameALabel = new JLabel("Игра А");
-        gameALabel.setBounds(1105,270,65,28);
-        gameALabel.setFont(gameABtn.getFont());
-        add(gameALabel);
+        gameABtn = new MenuButton();
+        gameABtn.setBounds(1090,87, gameABtn.getWidth(),gameABtn.getHeight());
         add(gameABtn);
+        gameABtn.setOpaque(false);
+        gameABtn.addActionListener(e -> {
+            display.getGameModeLabel().setText("Игра А");
+            display.getGameModeLabel().setBounds(20,335,120,22);
+        });
 
 
-        MenuButton gameBBtn = new MenuButton();
-        gameBBtn.setBounds(1100,310, gameBBtn.getWidth(),gameBBtn.getHeight());
-        JLabel gameBLabel = new JLabel("Игра B");
-        gameBLabel.setBounds(1105,330,65,28);
-        gameBLabel.setFont(gameBBtn.getFont());
-        add(gameBLabel);
+        gameBBtn = new MenuButton();
+        gameBBtn.setBounds(1090,175, gameBBtn.getWidth(),gameBBtn.getHeight());
         add(gameBBtn);
+        gameBBtn.setOpaque(false);
+        gameBBtn.addActionListener(e -> {
+            display.getGameModeLabel().setText("Игра Б");
+            display.getGameModeLabel().setBounds(20,335,120,22);
+        });
 
-        MenuButton rulesBtn = new MenuButton();
-        rulesBtn.setBounds(1100,370, rulesBtn.getWidth(),rulesBtn.getHeight());
-        JLabel rulesLabel = new JLabel("Правила");
-        rulesLabel.setBounds(1097,390,65,28);
-        rulesLabel.setFont(rulesBtn.getFont());
-        add(rulesLabel);
+        rulesBtn = new MenuButton();
+        rulesBtn.setBounds(1090,265, rulesBtn.getWidth(),rulesBtn.getHeight());
         add(rulesBtn);
+        rulesBtn.setOpaque(false);
+        rulesBtn.addActionListener(e -> {
+            new RulesDialog(this);
+        });
+
+
+        gameABtn.setFocusable(false);
+        gameBBtn.setFocusable(false);
+        rulesBtn.setFocusable(false);
+
+
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> rightButton.doClick();
+                    case KeyEvent.VK_LEFT, KeyEvent.VK_A -> leftButton.doClick();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
 
     }
+
+
+    public void disableMovementButtons() {
+        rightButton.setEnabled(false);
+        leftButton.setEnabled(false);
+    }
+
+    public void enableMovementButtons() {
+        rightButton.setEnabled(true);
+        leftButton.setEnabled(true);
+    }
+
+
+    public void disableMenuButtons() {
+        gameABtn.setEnabled(false);
+        gameBBtn.setEnabled(false);
+        rulesBtn.setEnabled(false);
+    }
+
+    public void enableMenuButtons() {
+        gameABtn.setEnabled(false);
+        gameBBtn.setEnabled(false);
+        rulesBtn.setEnabled(false);
+    }
+
 
 
 }
