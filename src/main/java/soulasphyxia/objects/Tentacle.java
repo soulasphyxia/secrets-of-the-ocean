@@ -53,7 +53,7 @@ public class Tentacle extends JLabel implements ActionListener {
             if(frameIndex == 0) {
                 reverse = false;
             }
-            if(frameIndex == 14) {g
+            if(frameIndex == 14) {
                 reverse = false;
                 frameIndex = 0;
             }
