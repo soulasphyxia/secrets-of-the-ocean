@@ -1,12 +1,11 @@
 package soulasphyxia.main;
+
 import soulasphyxia.objects.Diver;
-import soulasphyxia.objects.Octopus;
 import soulasphyxia.objects.Tentacle;
 import soulasphyxia.ui.ApplicationFrame;
 import soulasphyxia.ui.Fonts;
 import soulasphyxia.ui.GameDisplay;
 import soulasphyxia.ui.GameOverDialog;
-import soulasphyxia.utils.PositionFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +18,6 @@ public class Game implements Runnable{
     private final ApplicationFrame frame;
     private final GameDisplay display;
     private final Diver diver;
-    private final Octopus octopus;
     private boolean endGame;
     private boolean isGameStarted;
     private boolean isPlayerDead;
@@ -31,7 +29,6 @@ public class Game implements Runnable{
     private Thread gameThread;
     private Timer playerTimer;
 
-    private Timer speedIncreaseTimer;
     private boolean speedIncrease;
     private int tentacleSpeed;
 
@@ -47,7 +44,6 @@ public class Game implements Runnable{
         frame.setFocusable(true);
         diver = display.getDiver();
         divers = display.getDivers();
-        octopus = display.getOctopus();
         tentacles = display.getTentacles();
         isGameStarted = false;
         display.setOpaque(false);
@@ -171,7 +167,7 @@ public class Game implements Runnable{
     }
 
     private void increaseTentacleSpeed() {
-        speedIncreaseTimer = new Timer();
+        Timer speedIncreaseTimer = new Timer();
         String gameMode = display.getGameModeLabel().getText();
         int tentacleSpeed = 0;
         switch (gameMode) {

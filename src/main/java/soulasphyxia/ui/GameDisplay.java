@@ -7,12 +7,8 @@ import soulasphyxia.objects.Octopus;
 import soulasphyxia.objects.Tentacle;
 import soulasphyxia.utils.ResourcesLoader;
 import soulasphyxia.utils.TentacleFabric;
-
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 

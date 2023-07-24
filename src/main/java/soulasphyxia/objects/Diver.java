@@ -1,12 +1,10 @@
 package soulasphyxia.objects;
+
 import lombok.Getter;
 import lombok.Setter;
 import soulasphyxia.utils.PositionFrame;
 import soulasphyxia.utils.ResourcesLoader;
-
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -27,24 +27,6 @@ public class TentacleFabric {
         )));
     }
 
-    public static Tentacle getFirstTentacle() {
-        return new Tentacle(new ArrayList<>(List.of(
-                new PositionFrame(1000,1000,"empty_frame.png"),
-                new PositionFrame(160,123, "tentacle_1_1.png"),
-                new PositionFrame(93,123,"tentacle_1_2.png"),
-                new PositionFrame(58,105,"tentacle_1_3.png")
-        )));
-    }
-
-    public static Tentacle getSecondTentacle() {
-        return new Tentacle(new ArrayList<>(List.of(
-                new PositionFrame(1000,1000,"empty_frame.png"),
-                new PositionFrame(160,123, "tentacle_1_1.png"),
-                new PositionFrame(123,108,"tentacle_1_4.png"),
-                new PositionFrame(99,124,"tentacle_1_5.png"),
-                new PositionFrame(103,127,"tentacle_1_6.png")
-        )));
-    }
     public static Tentacle getThirdTentacle() {
         return new Tentacle(new ArrayList<>(List.of(
                 new PositionFrame(1000,1000,"empty_frame.png"),

@@ -1,9 +1,8 @@
 package soulasphyxia.ui;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import soulasphyxia.utils.HighScoreRecord;
 import soulasphyxia.utils.ResourcesLoader;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -17,16 +16,16 @@ public class HighScorePanel extends JDialog {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private final ResourcesLoader resourcesLoader = new ResourcesLoader();
     private final File file;
     private ArrayList<HighScoreRecord> recordList;
 
-    private Font font = new Font("Dialog",Font.PLAIN,21);
+    private final Font font = new Font("Dialog",Font.PLAIN,21);
     public HighScorePanel(Frame frame, HighScoreRecord record) throws IOException {
         super(frame,"Таблица рекордов");
+        ResourcesLoader resourcesLoader = new ResourcesLoader();
         file = new File(resourcesLoader.getResource("highscores.json").getFile());
         try{
-            recordList = objectMapper.readValue(file,ArrayList.class);
+            recordList = objectMapper.readValue(file, new TypeReference<>() {});
         }catch (Exception e){
             recordList = new ArrayList<>();
         }

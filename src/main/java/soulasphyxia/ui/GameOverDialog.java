@@ -1,11 +1,7 @@
 package soulasphyxia.ui;
-
 import soulasphyxia.utils.HighScoreRecord;
-
 import javax.swing.*;
-import javax.swing.text.DefaultHighlighter;
 import java.awt.*;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class GameOverDialog extends JDialog {
@@ -13,7 +9,7 @@ public class GameOverDialog extends JDialog {
     private final int HEIGHT = 250;
 
     private final int score;
-    private String gameMode;
+    private final String gameMode;
     public GameOverDialog(Frame owner, int score,String gameMode) {
         super(owner,"Игра окончена!");
         this.score = score;

@@ -43,8 +43,6 @@ public class RulesDialog extends JDialog {
         okButton.setBounds(350,370,70,35);
         okButton.setFont(new Font("Dialog", Font.PLAIN,17));
         add(okButton);
-        okButton.addActionListener(e -> {
-            dispose();
-        });
+        okButton.addActionListener(e -> dispose());
     }
 }

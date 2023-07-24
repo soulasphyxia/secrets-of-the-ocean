@@ -1,9 +1,7 @@
 package soulasphyxia.ui;
-
 import lombok.Getter;
 import lombok.Setter;
 import soulasphyxia.utils.ResourcesLoader;
-
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -82,9 +80,7 @@ public class ApplicationFrame extends JFrame {
         rulesBtn.setBounds(1090,265, rulesBtn.getWidth(),rulesBtn.getHeight());
         add(rulesBtn);
         rulesBtn.setOpaque(false);
-        rulesBtn.addActionListener(e -> {
-            new RulesDialog(this);
-        });
+        rulesBtn.addActionListener(e -> new RulesDialog(this));
 
 
         gameABtn.setFocusable(false);
