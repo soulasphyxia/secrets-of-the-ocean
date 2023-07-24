@@ -30,13 +30,18 @@ public class Game implements Runnable{
 
     private Thread gameThread;
     private Timer playerTimer;
+
+    private Timer speedIncreaseTimer;
+    private boolean speedIncrease;
     private int tentacleSpeed;
 
-    private boolean liveAdded;
+    private int gameASpeed = 1200;
+    private int gameBSpeed = 950;
+
 
 
     public Game() throws IOException, FontFormatException{
-        //new Fonts().initializeFonts();
+        new Fonts().initializeFonts();
         display = new GameDisplay();
         frame = new ApplicationFrame(display);
         frame.setFocusable(true);
@@ -45,6 +50,7 @@ public class Game implements Runnable{
         octopus = display.getOctopus();
         tentacles = display.getTentacles();
         isGameStarted = false;
+        display.setOpaque(false);
         frame.disableMovementButtons();
         addStartGameListener();
     }
@@ -62,16 +68,57 @@ public class Game implements Runnable{
     }
 
     private void checkCollisions() {
-        PositionFrame currentFrame = diver.getFrames().get(diver.getFrameIndex());
-        Rectangle diverRect = new Rectangle(new Point(currentFrame.getX(), currentFrame.getY()),
-                                            new Dimension(90, 90));
-        for(Tentacle t : tentacles) {
-            Rectangle tentacleRect = new Rectangle(t.getBounds());
-            if(tentacleRect.intersects(diverRect)) {
-                isPlayerDead = true;
+        int index = diver.getFrameIndex();
+        Rectangle diverRect = new Rectangle(new Point(diver.getX(),diver.getY()-10),
+                                            new Dimension(90,70));
+        switch (index) {
+            case 1,2 -> {
+                diverRect = new Rectangle(new Point(diver.getX(),diver.getY()),
+                                          new Dimension(50,50));
+                Tentacle t = tentacles.get(0);
+                Rectangle rect = new Rectangle(t.getX(),t.getY(),t.getWidth(),t.getHeight());
+                if(rect.intersects(diverRect)) {
+                    isPlayerDead = true;
+                }
+            }
+            case 3 -> {
+                Tentacle t = tentacles.get(1);
+                Rectangle rect;
+                if(t.isTip()) {
+                    rect = new Rectangle(t.getX(),t.getY(),t.getWidth()+30,t.getHeight());
+                }else {
+                    rect = new Rectangle(0,0,0,0);
+                }
+                if(rect.intersects(diverRect)) {
+                    isPlayerDead = true;
+                }
+            }
+
+            case 4 -> {
+                Tentacle t = tentacles.get(2);
+                Rectangle rect;
+                if(t.isTip()) {
+                    rect = new Rectangle(t.getX(),t.getY(),t.getWidth(),t.getHeight());
+                }else {
+                    rect = new Rectangle(0,0,0,0);
+                }
+                if(rect.intersects(diverRect)) {
+                    isPlayerDead = true;
+                }
+            }
+            case 5 -> {
+                Tentacle t = tentacles.get(3);
+                Rectangle rect;
+                if(t.isTip()) {
+                    rect = new Rectangle(t.getX(),t.getY(),t.getWidth(),t.getHeight());
+                }else {
+                    rect = new Rectangle(0,0,0,0);
+                }
+                if(rect.intersects(diverRect)) {
+                    isPlayerDead = true;
+                }
             }
         }
-
     }
 
     private void startGameLoop() {
@@ -123,6 +170,31 @@ public class Game implements Runnable{
         },1000);
     }
 
+    private void increaseTentacleSpeed() {
+        speedIncreaseTimer = new Timer();
+        String gameMode = display.getGameModeLabel().getText();
+        int tentacleSpeed = 0;
+        switch (gameMode) {
+            case "Игра А" -> {
+                gameASpeed -= 70;
+                tentacleSpeed = gameASpeed;
+            }
+            case "Игра Б" ->  {
+                gameBSpeed -= 30;
+                tentacleSpeed = gameBSpeed;
+            }
+        }
+
+        int finalTentacleSpeed = tentacleSpeed;
+        speedIncreaseTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                tentacles.forEach(x -> x.getTimer().setDelay(finalTentacleSpeed));
+                speedIncrease = false;
+            }
+        },15000);
+    }
+
     private void reset() {
         isPlayerDead = false;
         diver.setTreasure(false);
@@ -138,7 +210,7 @@ public class Game implements Runnable{
 
     private void addStartGameListener() {
         frame.getGameABtn().addActionListener(e -> {
-            tentacleSpeed = 2000;
+            tentacleSpeed = gameASpeed;
             if(!isGameStarted) {
                 startGameLoop();
             }else {
@@ -149,7 +221,7 @@ public class Game implements Runnable{
         });
 
         frame.getGameBBtn().addActionListener(e -> {
-            tentacleSpeed = 950;
+            tentacleSpeed = gameBSpeed;
             if(!isGameStarted) {
                 startGameLoop();
             }else {
@@ -167,17 +239,15 @@ public class Game implements Runnable{
             antiIdle();
             startTentacles();
             while(!isPlayerDead) {
+                if(!speedIncrease) {
+                    speedIncrease = true;
+                    increaseTentacleSpeed();
+                }
+                checkCollisions();
                 updateScore();
                 treasureDelivered();
-                checkCollisions();
                 if((diver.getScore() == 200 || diver.getScore() == 500) && livesCount < 3){
-                    liveAdded = false;
                     ++livesCount;
-                    System.out.println(livesCount);
-                }
-                if(!liveAdded){
-                    liveAdded = true;
-                    addLive();
                 }
             }
             --livesCount;
@@ -195,13 +265,11 @@ public class Game implements Runnable{
 
         gameThread.interrupt();
         isGameStarted = false;
-        new GameOverDialog(frame);
+        new GameOverDialog(frame,diver.getScore(),display.getGameModeLabel().getText());
         frame.enableMenuButtons();
-    }
-
-    private void addLive() {
 
     }
+
 
     private void dieAnimation() {
         frame.disableMovementButtons();
@@ -215,10 +283,8 @@ public class Game implements Runnable{
     @Override
     public void run() {
         try {
-            frame.update(frame.getGraphics());
             endGame = false;
             isGameStarted = true;
-            liveAdded = true;
             diver.setScore(0);
             divers.forEach(diver -> diver.setVisible(true));
             gameLoop();

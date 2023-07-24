@@ -37,11 +37,9 @@ public class GameDisplay extends JPanel {
         diver = new Diver();
         octopus = new Octopus();
         tentacles = TentacleFabric.getTentacles();
-        tentacles.forEach(x -> x.setBorder(new LineBorder(Color.black,1)));
         divers = new ArrayList<>();
         setSize(DISPLAY_WIDTH,DISPLAY_HEIGHT);
         initComponents();
-        setOpaque(false);
         setVisible(true);
         setLayout(null);
     }
@@ -75,4 +73,8 @@ public class GameDisplay extends JPanel {
         });
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    }
 }

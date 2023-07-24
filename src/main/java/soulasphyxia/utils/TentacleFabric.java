@@ -12,14 +12,14 @@ public class TentacleFabric {
                 new PositionFrame(1000,1000,"empty_frame.png"),
                 new PositionFrame(160,123, "tentacle_1_1.png"),
                 new PositionFrame(93,123,"tentacle_1_2.png"),
-                new PositionFrame(58,105,"tentacle_1_3.png",true),
+                new PositionFrame(58,105,"tentacle_1_3.png"),
                 new PositionFrame(93,123,"tentacle_1_2.png"),
                 new PositionFrame(160,123, "tentacle_1_1.png"),
                 new PositionFrame(1000,1000,"empty_frame.png"),
                 new PositionFrame(160,123, "tentacle_1_1.png"),
                 new PositionFrame(123,108,"tentacle_1_4.png"),
                 new PositionFrame(99,124,"tentacle_1_5.png"),
-                new PositionFrame(103,127,"tentacle_1_6.png",true),
+                new PositionFrame(103,127,"tentacle_1_6.png"),
                 new PositionFrame(99,124,"tentacle_1_5.png"),
                 new PositionFrame(123,108,"tentacle_1_4.png"),
                 new PositionFrame(160,123, "tentacle_1_1.png"),
@@ -52,7 +52,7 @@ public class TentacleFabric {
                 new PositionFrame(231,159,"tentacle_2_2.png"),
                 new PositionFrame(231,165,"tentacle_2_3.png"),
                 new PositionFrame(231,170,"tentacle_2_4.png"),
-                new PositionFrame(231,172,"tentacle_2_5.png",true)
+                new PositionFrame(231,172,"tentacle_2_5.png")
 
         )));
     }
@@ -62,7 +62,7 @@ public class TentacleFabric {
                 new PositionFrame(315,212, "tentacle_3_1.png"),
                 new PositionFrame(315,213,"tentacle_3_2.png"),
                 new PositionFrame(315,213,"tentacle_3_3.png"),
-                new PositionFrame(315,213,"tentacle_3_4.png",true)
+                new PositionFrame(315,213,"tentacle_3_4.png")
 
         )));
     }
@@ -71,7 +71,7 @@ public class TentacleFabric {
                 new PositionFrame(1000,1000,"empty_frame.png"),
                 new PositionFrame(444,243, "tentacle_4_1.png"),
                 new PositionFrame(444,243,"tentacle_4_2.png"),
-                new PositionFrame(444,243,"tentacle_4_3.png", true)
+                new PositionFrame(444,243,"tentacle_4_3.png")
         )));
     }
 

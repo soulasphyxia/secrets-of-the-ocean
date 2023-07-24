@@ -35,12 +35,11 @@ public class Diver extends JLabel {
         this.score = 0;
         this.treasure = false;
         this.isDead = false;
-        setBorder(new LineBorder(Color.BLACK,1));
         this.frames = new ArrayList<>(List.of(new PositionFrame(33,0,"images/diver_0.png",90,90),
-                                              new PositionFrame(33,93,"images/diver_1.png",90,30),
+                                              new PositionFrame(33,93,"images/diver_1.png",30,30),
                                               new PositionFrame(53,223,"images/diver_2.png",90,90),
                                               new PositionFrame(149,280,"images/diver_3.png",90,90),
-                                              new PositionFrame(260,280,"images/diver_4.png",1,1),
+                                              new PositionFrame(260,280,"images/diver_4.png",90,90),
                                               new PositionFrame(390,285,"images/diver_5.png",90,90)
                 ));
 
@@ -75,5 +74,4 @@ public class Diver extends JLabel {
         this.setIcon(icon);
         setBounds(x,y,icon.getIconWidth(),icon.getIconHeight());
     }
-
 }

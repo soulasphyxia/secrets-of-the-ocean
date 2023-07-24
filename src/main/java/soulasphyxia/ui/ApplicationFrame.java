@@ -11,8 +11,6 @@ import java.awt.event.KeyListener;
 @Getter
 @Setter
 public class ApplicationFrame extends JFrame {
-    private final int FRAME_WIDTH = 1269;
-    private final int FRAME_HEIGHT = 764;
     private final GameDisplay display;
     private boolean gameModeSet = false;
     private MovementButton rightButton;
@@ -20,6 +18,9 @@ public class ApplicationFrame extends JFrame {
     private MenuButton gameBBtn;
     private MenuButton gameABtn;
     private ResourcesLoader rl = new ResourcesLoader();
+    ImageIcon icon = new ImageIcon(rl.getResource("images/background_source.jpg"));
+    private final int FRAME_WIDTH = icon.getIconWidth();
+    private final int FRAME_HEIGHT = icon.getIconHeight();
     private MenuButton rulesBtn;
     public ApplicationFrame(GameDisplay display){
         super("Эмулятор Электроника ИМ-03 Тайны Океана");
@@ -27,7 +28,6 @@ public class ApplicationFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(FRAME_WIDTH,FRAME_HEIGHT);
         setResizable(false);
-        ImageIcon icon = new ImageIcon(rl.getResource("images/background_source.jpg"));
         setContentPane(new JLabel(icon));
         setLocationRelativeTo(null);
         initComponents();
@@ -128,9 +128,9 @@ public class ApplicationFrame extends JFrame {
     }
 
     public void enableMenuButtons() {
-        gameABtn.setEnabled(false);
-        gameBBtn.setEnabled(false);
-        rulesBtn.setEnabled(false);
+        gameABtn.setEnabled(true);
+        gameBBtn.setEnabled(true);
+        rulesBtn.setEnabled(true);
     }
 
 
