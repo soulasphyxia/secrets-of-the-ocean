@@ -36,11 +36,11 @@ public class Tentacle extends JLabel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(frameIndex  == frames.size()) {
+            isTip = true;
+        }
         if(frameIndex < frames.size() && !reverse) {
             setFrame(frames.get(frameIndex));
-            if(frameIndex  == frames.size() - 1) {
-                isTip = true;
-            }
             frameIndex++;
             isTip = false;
         }
@@ -53,7 +53,7 @@ public class Tentacle extends JLabel implements ActionListener {
             if(frameIndex == 0) {
                 reverse = false;
             }
-            if(frameIndex == 14) {
+            if(frameIndex == 14) {g
                 reverse = false;
                 frameIndex = 0;
             }
