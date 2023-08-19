@@ -1,0 +1,18 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< soulasphyxia:secrets-of-the-ocean >------------------
+[INFO] Building secrets-of-the-ocean 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.3.0:tree (default-cli) @ secrets-of-the-ocean ---
+[INFO] soulasphyxia:secrets-of-the-ocean:jar:1.0-SNAPSHOT
+[INFO] +- org.projectlombok:lombok:jar:1.18.26:compile
+[INFO] \- com.fasterxml.jackson.core:jackson-databind:jar:2.14.2:compile
+[INFO]    +- com.fasterxml.jackson.core:jackson-annotations:jar:2.14.2:compile (version managed from 2.14.2)
+[INFO]    \- com.fasterxml.jackson.core:jackson-core:jar:2.14.2:compile (version managed from 2.14.2)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.945 s
+[INFO] Finished at: 2023-08-19T07:19:39+07:00
+[INFO] ------------------------------------------------------------------------

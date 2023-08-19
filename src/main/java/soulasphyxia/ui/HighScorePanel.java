@@ -1,4 +1,5 @@
 package soulasphyxia.ui;
+import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import soulasphyxia.utils.HighScoreRecord;
