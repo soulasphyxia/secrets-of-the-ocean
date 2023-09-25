@@ -1,13 +1,22 @@
 package soulasphyxia.main;
 import com.fasterxml.jackson.core.type.TypeReference;
+import soulasphyxia.utils.FileResourcesUtils;
+import soulasphyxia.utils.HighScoreReader;
+import soulasphyxia.utils.ResourcesLoader;
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.util.Objects;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) throws IOException, FontFormatException {
-        new TypeReference<>(){};
-        new Game();
+    public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException {
+
+        //new Game();
     }
 }

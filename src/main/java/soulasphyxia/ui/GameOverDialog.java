@@ -3,6 +3,7 @@ import soulasphyxia.utils.HighScoreRecord;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class GameOverDialog extends JDialog {
     private final int WIDTH = 450;
@@ -10,10 +11,10 @@ public class GameOverDialog extends JDialog {
 
     private final int score;
     private final String gameMode;
-    public GameOverDialog(Frame owner, int score,String gameMode) {
+    public GameOverDialog(Frame owner, int score, char gameMode) {
         super(owner,"Игра окончена!");
         this.score = score;
-        this.gameMode = gameMode;
+        this.gameMode = String.valueOf(gameMode);
         setSize(WIDTH,HEIGHT);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -49,13 +50,13 @@ public class GameOverDialog extends JDialog {
 
         submitBtn.addActionListener(e -> {
             String playerName = playerNameInput.getText();
-            if(playerName.equals("")) {
+            if(playerName.isEmpty()) {
                 System.out.println("Введите имя!");
             }else {
                 try {
                     HighScoreRecord record = new HighScoreRecord(playerName,score,gameMode);
                     new HighScorePanel((Frame) this.getParent(),record);
-                } catch (IOException ex) {
+                } catch (IOException | URISyntaxException ex) {
                     throw new RuntimeException(ex);
                 }
                 dispose();

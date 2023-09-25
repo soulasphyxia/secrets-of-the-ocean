@@ -2,34 +2,38 @@ package soulasphyxia.ui;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import soulasphyxia.main.Main;
+import soulasphyxia.utils.HighScoreReader;
 import soulasphyxia.utils.HighScoreRecord;
+import soulasphyxia.utils.HighScoreWriter;
 import soulasphyxia.utils.ResourcesLoader;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class HighScorePanel extends JDialog {
     private final int WIDTH = 500;
     private final int HEIGHT = 450;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
     private final File file;
     private ArrayList<HighScoreRecord> recordList;
 
     private final Font font = new Font("Dialog",Font.PLAIN,21);
-    public HighScorePanel(Frame frame, HighScoreRecord record) throws IOException {
+    public HighScorePanel(Frame frame, HighScoreRecord record) throws IOException, URISyntaxException {
         super(frame,"Таблица рекордов");
-        ResourcesLoader resourcesLoader = new ResourcesLoader();
-        file = new File(resourcesLoader.getResource("highscores.json").getFile());
-        try{
-            recordList = objectMapper.readValue(file, new TypeReference<>() {});
-        }catch (Exception e){
-            recordList = new ArrayList<>();
-        }
+        Path targetPath = Paths.get(Objects.requireNonNull(Main.class.getResource("/scores.txt")).toURI());
+        file = new File(String.valueOf(targetPath));
+        HighScoreReader highScoreReader = new HighScoreReader(file);
+        recordList = highScoreReader.readHighScores();
+        System.out.println(recordList);
         if(!recordList.contains(record)){
             recordList.add(record);
         }
@@ -86,8 +90,9 @@ public class HighScorePanel extends JDialog {
         });
 
         okButton.addActionListener(e -> {
+            HighScoreWriter writer = new HighScoreWriter(file);
             try {
-                objectMapper.writeValue(file,recordList);
+                writer.writeRecords(recordList);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }

@@ -261,7 +261,7 @@ public class Game implements Runnable{
 
         gameThread.interrupt();
         isGameStarted = false;
-        new GameOverDialog(frame,diver.getScore(),display.getGameModeLabel().getText());
+        new GameOverDialog(frame,diver.getScore(),display.getGameModeLabel().getText().charAt(5));
         frame.enableMenuButtons();
 
     }
