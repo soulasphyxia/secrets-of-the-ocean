@@ -50,8 +50,8 @@ public class GameDisplay extends JPanel {
         ImageIcon icon = new ImageIcon(rl.getResource("images/diver_0.png"));
         diver1.setIcon(icon);
         diver2.setIcon(icon);
-        diver1.setBounds(diver.getX() + 60,diver1.getY(),icon.getIconWidth(),icon.getIconHeight());
-        diver2.setBounds(diver.getX() + 120,diver1.getY(),icon.getIconWidth(),icon.getIconHeight());
+        diver1.setBounds(diver.getX() + 60,diver.getY(),icon.getIconWidth(),icon.getIconHeight());
+        diver2.setBounds(diver.getX() + 120,diver.getY(),icon.getIconWidth(),icon.getIconHeight());
         divers.add(diver1);
         divers.add(diver2);
         divers.forEach(this::add);
@@ -59,7 +59,7 @@ public class GameDisplay extends JPanel {
         octopus.setBounds(octopus.getX(), octopus.getY(), octopus.getOCTOPUS_WIDTH(), octopus.getOCTOPUS_HEIGHT());
         add(octopus);
         scoreLabel.setFont(new Font("Digital Counter 7",Font.PLAIN,64));
-        scoreLabel.setBounds(450,5,128,64);
+        scoreLabel.setBounds(450,0,128,64);
         add(scoreLabel);
         gameModeLabel.setFont(new Font("Digital Counter 7",Font.PLAIN,22));
         add(gameModeLabel);

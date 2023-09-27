@@ -2,17 +2,15 @@ package soulasphyxia.ui;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.FileUtils;
 import soulasphyxia.main.Main;
-import soulasphyxia.utils.HighScoreReader;
-import soulasphyxia.utils.HighScoreRecord;
-import soulasphyxia.utils.HighScoreWriter;
-import soulasphyxia.utils.ResourcesLoader;
+import soulasphyxia.utils.*;
+
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -22,18 +20,23 @@ import java.util.Objects;
 public class HighScorePanel extends JDialog {
     private final int WIDTH = 500;
     private final int HEIGHT = 450;
-
-    private final File file;
+    private File file;
     private ArrayList<HighScoreRecord> recordList;
 
     private final Font font = new Font("Dialog",Font.PLAIN,21);
     public HighScorePanel(Frame frame, HighScoreRecord record) throws IOException, URISyntaxException {
         super(frame,"Таблица рекордов");
-        Path targetPath = Paths.get(Objects.requireNonNull(Main.class.getResource("/scores.txt")).toURI());
-        file = new File(String.valueOf(targetPath));
+        //Path targetPath = Paths.get(Objects.requireNonNull(Main.class.getResource("/scores.txt")).toURI());
+        String path = getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+        path = path.substring(0, path.lastIndexOf('/')+1);
+        File root = new File(path);
+
+        file = new File(root, "/classes/scores.txt");
+
+
+
         HighScoreReader highScoreReader = new HighScoreReader(file);
         recordList = highScoreReader.readHighScores();
-        System.out.println(recordList);
         if(!recordList.contains(record)){
             recordList.add(record);
         }

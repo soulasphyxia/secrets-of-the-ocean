@@ -28,12 +28,12 @@ public class Diver extends JLabel {
         super();
         this.setIcon(new ImageIcon(rl.getResource(path)));
         this.x = 33;
-        this.y = 0;
+        this.y = -23;
         this.frameIndex = 0;
         this.score = 0;
         this.treasure = false;
         this.isDead = false;
-        this.frames = new ArrayList<>(List.of(new PositionFrame(33,0,"images/diver_0.png",90,90),
+        this.frames = new ArrayList<>(List.of(new PositionFrame(this.x,this.y,"images/diver_0.png",90,90),
                                               new PositionFrame(33,93,"images/diver_1.png",30,30),
                                               new PositionFrame(53,223,"images/diver_2.png",90,90),
                                               new PositionFrame(149,280,"images/diver_3.png",90,90),

@@ -39,11 +39,11 @@ public class ApplicationFrame extends JFrame {
         add(display);
 
         leftButton = new MovementButton();
-        leftButton.setBounds(98,499,90,90);
+        leftButton.setBounds(90,479,90,90);
         add(leftButton);
 
         rightButton = new MovementButton();
-        rightButton.setBounds(1093,502,90,90);
+        rightButton.setBounds(1086,483,90,90);
         add(rightButton);
 
 
@@ -58,26 +58,27 @@ public class ApplicationFrame extends JFrame {
         });
 
         gameABtn = new MenuButton();
-        gameABtn.setBounds(1090,87, gameABtn.getWidth(),gameABtn.getHeight());
+        gameABtn.setBounds(1083,67, gameABtn.getWidth(),gameABtn.getHeight());
         add(gameABtn);
         gameABtn.setOpaque(false);
         gameABtn.addActionListener(e -> {
             display.getGameModeLabel().setText("Игра А");
-            display.getGameModeLabel().setBounds(20,335,120,22);
+            display.getGameModeLabel().setBounds(20,320,120,22);
         });
 
 
         gameBBtn = new MenuButton();
-        gameBBtn.setBounds(1090,175, gameBBtn.getWidth(),gameBBtn.getHeight());
+        gameBBtn.setBounds(1083,155, gameBBtn.getWidth(),gameBBtn.getHeight());
+
         add(gameBBtn);
         gameBBtn.setOpaque(false);
         gameBBtn.addActionListener(e -> {
             display.getGameModeLabel().setText("Игра Б");
-            display.getGameModeLabel().setBounds(20,335,120,22);
+            display.getGameModeLabel().setBounds(20,320,120,22);
         });
 
         rulesBtn = new MenuButton();
-        rulesBtn.setBounds(1090,265, rulesBtn.getWidth(),rulesBtn.getHeight());
+        rulesBtn.setBounds(1083,245, rulesBtn.getWidth(),rulesBtn.getHeight());
         add(rulesBtn);
         rulesBtn.setOpaque(false);
         rulesBtn.addActionListener(e -> new RulesDialog(this));

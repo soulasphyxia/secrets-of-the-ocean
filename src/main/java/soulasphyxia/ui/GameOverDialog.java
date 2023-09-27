@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Objects;
 
 public class GameOverDialog extends JDialog {
     private final int WIDTH = 450;
